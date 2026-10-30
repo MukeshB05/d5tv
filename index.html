@@ -124,6 +124,39 @@
         #liveVideo { z-index: 4; background: transparent; }
         #posterImage.static-hidden { opacity: 0; visibility: hidden; }
 
+        #clickToPlay {
+            position: absolute;
+            inset: 0;
+            z-index: 11;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            gap: 12px;
+            background: rgba(0, 0, 0, 0.65);
+            color: #fff;
+            cursor: pointer;
+            text-align: center;
+            -webkit-tap-highlight-color: transparent;
+        }
+        #clickToPlay .ctp-btn {
+            width: 72px; height: 72px;
+            border-radius: 50%;
+            background: var(--primary-gradient);
+            display: flex; align-items: center; justify-content: center;
+            font-size: 28px;
+            box-shadow: 0 0 0 0 rgba(229, 9, 20, 0.6);
+            animation: ctpPulse 1.6s ease-out infinite;
+        }
+        #clickToPlay .ctp-btn i { margin-left: 5px; }
+        #clickToPlay .ctp-text { font-size: 18px; font-weight: 600; }
+        #clickToPlay .ctp-sub { font-size: 13px; color: var(--text-secondary); }
+        @keyframes ctpPulse {
+            0% { box-shadow: 0 0 0 0 rgba(229, 9, 20, 0.6); }
+            70% { box-shadow: 0 0 0 22px rgba(229, 9, 20, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(229, 9, 20, 0); }
+        }
+
         #loadingOverlay {
             position: absolute;
             top: 0;
@@ -648,6 +681,11 @@
                     <div class="loading-spinner"></div>
                     <div>Loading...</div>
                 </div>
+                <div id="clickToPlay" role="button" tabindex="0" aria-label="Click to play">
+                    <div class="ctp-btn"><i class="fas fa-play"></i></div>
+                    <div class="ctp-text">Click to play</div>
+                    <div class="ctp-sub">Your browser blocked autoplay</div>
+                </div>
 
                 <video id="liveVideo" playsinline webkit-playsinline></video>
 
@@ -1028,6 +1066,35 @@
             video.removeAttribute("src"); video.load(); 
         }
 
+        // ---- "Click to play" prompt: shown when the browser blocks autoplay ----
+        const clickToPlay = document.getElementById("clickToPlay");
+        function hideClickToPlay() { clickToPlay.style.display = "none"; }
+        function safePlay() {
+            const token = loadToken;
+            const p = video.play();
+            if (!p || !p.catch) return;
+            p.catch(function(e) {
+                if (token !== loadToken) return;                 // a newer source replaced this one
+                if (e && e.name === "NotAllowedError") {
+                    // Stream loaded fine; the browser just wants a user gesture.
+                    clearStartupTimer();                          // don't treat this as a dead source
+                    loadingOverlay.style.display = "none";
+                    hideVintageStatic();
+                    clickToPlay.style.display = "flex";
+                } else if (e && e.name !== "AbortError") {
+                    console.error(e);
+                }
+            });
+        }
+        function onClickToPlay(ev) {
+            if (ev) ev.preventDefault();
+            hideClickToPlay();
+            video.play().catch(function(e) { console.error(e); if (e && e.name === "NotAllowedError") clickToPlay.style.display = "flex"; });
+        }
+        clickToPlay.addEventListener("click", onClickToPlay);
+        clickToPlay.addEventListener("keydown", function(ev) { if (ev.key === "Enter" || ev.key === " ") onClickToPlay(ev); });
+        video.addEventListener("playing", hideClickToPlay);
+
         // ---- Source loading with automatic fallback to the next source link ----
         const STARTUP_TIMEOUT_MS = 15000;   // give each source this long to start playing
         let loadToken = 0;                  // identifies the current attempt; stale callbacks are ignored
@@ -1053,6 +1120,7 @@
             cleanupPlayers();
             clearStartupTimer();
             const token = ++loadToken;
+            hideClickToPlay();
             currentBackupIndex = sourceIndex;
             const source = currentBackupSources[sourceIndex];
             if (!source) { showError("No Signal"); return; }
@@ -1078,7 +1146,7 @@
                 else { shakaPlayer.configure({ drm: { clearKeys: {} } }); }
                 shakaPlayer.load(source.url).then(() => {
                     if (token !== loadToken) return;
-                    video.play().catch(e => console.error(e));
+                    safePlay();
                     setTimeout(() => updateShakaQualityAndAudio(shakaPlayer), 1000);
                 }).catch((error) => {
                     if (error && error.code === 7000) return;   // LOAD_INTERRUPTED: a newer load replaced this one
@@ -1094,7 +1162,7 @@
                 let netRetries = 0, mediaRetries = 0;
                 h.loadSource(source.url);
                 h.attachMedia(video);
-                h.on(Hls.Events.MANIFEST_PARSED, function() { if (token !== loadToken) return; updateHlsQualityAndAudio(); video.play().catch(e => console.error(e)); });
+                h.on(Hls.Events.MANIFEST_PARSED, function() { if (token !== loadToken) return; updateHlsQualityAndAudio(); safePlay(); });
                 h.on(Hls.Events.AUDIO_TRACKS_UPDATED, function() { updateHlsQualityAndAudio(); });
                 h.on(Hls.Events.LEVEL_SWITCHED, function(event, data) {
                     if (hls && hls.levels && data.level !== undefined && hls.levels[data.level] && hls.levels[data.level].height) {
@@ -1116,7 +1184,7 @@
                 // Native HLS (Safari / iOS): use assignable handlers so they never stack up across sources.
                 video.onloadedmetadata = function() {
                     if (token !== loadToken) return;
-                    video.play().catch(e => console.error(e));
+                    safePlay();
                     qualityMenu.disabled = true; qualityMenu.style.display = "none";
                     audioMenu.disabled = true; audioMenu.style.display = "none";
                 };
@@ -1253,7 +1321,6 @@
             video.addEventListener("pause", function() { playPauseBtn.innerHTML = '<i class="fas fa-play"></i>'; });
             video.addEventListener("waiting", function() { loadingOverlay.style.display = "flex"; });
             video.addEventListener("playing", function() { loadingOverlay.style.display = "none"; errorMessage.style.display = "none"; });
-            video.addEventListener("error", function() { loadingOverlay.style.display = "none"; showError("Playback error. Trying backup..."); tryNextBackup(); });
             channelSearch.addEventListener("input", filterChannels);
             sourceMenu.addEventListener("change", function() { loadSource(parseInt(this.value)); });
             loadChannels();

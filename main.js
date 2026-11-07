@@ -1734,7 +1734,7 @@ const channels = [
             { 
                 name: "Citi Channel", 
                 sources: [
-                    { name: "Server 1", url: "https://cors-proxy.cooks.fyi/http://stream.logichost.in:1935/CITI/live/playlist.m3u8" },
+                    { name: "Server 1", url: "https://dreamlyproxy.mukeshlive.workers.dev/?url=http://stream.logichost.in:1935/CITI/live/playlist.m3u8" },
                 ], 
                 img: "https://i.ibb.co/5XTyVQW8/Citi-Channel.jpg", 
                 category: "Local Cable Channel (Kerala)",
@@ -1743,7 +1743,7 @@ const channels = [
             { 
                 name: "RK TV", 
                 sources: [
-                    { name: "Server 1", url: "https://cors-proxy.cooks.fyi/http://rktv.phoenixcreations.online/rktv/rktv/playlist.m3u8" },
+                    { name: "Server 1", url: "https://dreamlyproxy.mukeshlive.workers.dev/?url=http://rktv.phoenixcreations.online/rktv/rktv/playlist.m3u8" },
                 ], 
                 img: "https://i.ibb.co/gMQLySTN/RKTV.jpg", 
                 category: "Local Cable Channel (Tamilnadu)",
@@ -1752,7 +1752,7 @@ const channels = [
             { 
                 name: "Kalika TV", 
                 sources: [
-                    { name: "Server 1", url: "https://cors-proxy.cooks.fyi/http://server.applelive.in/kalikatv/kalikatv.m3u8" },
+                    { name: "Server 1", url: "https://dreamlyproxy.mukeshlive.workers.dev/?url=http://server.applelive.in/kalikatv/kalikatv.m3u8" },
                 ], 
                 img: "https://i.ibb.co/qYyFSg3m/Kalika-TV.jpg", 
                 category: "Local Cable Channel (Kerala)",
@@ -1851,7 +1851,7 @@ const channels = [
             { 
                 name: "Global On", 
                 sources: [
-                    { name: "Server 1", url: "https://cors-proxy.cooks.fyi/http://103.72.179.18:8080/memfs/691339d4-2b7b-4f19-9f70-326a357fdbd4.m3u8" },
+                    { name: "Server 1", url: "https://dreamlyproxy.mukeshlive.workers.dev/?url=http://103.72.179.18:8080/memfs/691339d4-2b7b-4f19-9f70-326a357fdbd4.m3u8" },
                 ], 
                 img: "https://i.ibb.co/GfQZG57W/Global-On.jpg", 
                 category: "Local Cable Channel (Kerala)",
@@ -1860,7 +1860,7 @@ const channels = [
             { 
                 name: "TCV Tirur", 
                 sources: [
-                    { name: "Server 1", url: "https://cors-proxy.cooks.fyi/https://js.logichost.in/hls/f4d7e750ee8f8385fe5be797/index.m3u8" },
+                    { name: "Server 1", url: "https://dreamlyproxy.mukeshlive.workers.dev/?url=https://js.logichost.in/hls/f4d7e750ee8f8385fe5be797/index.m3u8" },
                 ], 
                 img: "https://i.ibb.co/6kpvn5d/TCV.jpg", 
                 category: "Local Cable Channel (Kerala)",
@@ -1869,7 +1869,7 @@ const channels = [
             { 
                 name: "Media Malabar", 
                 sources: [
-                    { name: "Server 1", url: "https://cors-proxy.cooks.fyi/https://js.logichost.in/hls/151f0e3016366711834ba1ef/index.m3u8" },
+                    { name: "Server 1", url: "https://dreamlyproxy.mukeshlive.workers.dev/?url=https://js.logichost.in/hls/151f0e3016366711834ba1ef/index.m3u8" },
                 ], 
                 img: "https://i.ibb.co/GGhkQKP/Media-Malabar.jpg", 
                 category: "Local Cable Channel (Kerala)",
@@ -1878,7 +1878,7 @@ const channels = [
             { 
                 name: "C Net", 
                 sources: [
-                    { name: "Server 1", url: "https://cors-proxy.cooks.fyi/https://js.logichost.in/hls/6c810aa85aefcf722f0bf48c/index.m3u8" },
+                    { name: "Server 1", url: "https://dreamlyproxy.mukeshlive.workers.dev/?url=https://js.logichost.in/hls/6c810aa85aefcf722f0bf48c/index.m3u8" },
                 ], 
                 img: "https://i.ibb.co/tphLCgwb/CNet.jpg", 
                 category: "Local Cable Channel (Kerala)",
@@ -1887,7 +1887,7 @@ const channels = [
             { 
                 name: "Malabar News", 
                 sources: [
-                    { name: "Server 1", url: "https://cors-proxy.cooks.fyi/http://cloud.logichost.in:1935/live/malabarnews/index.m3u8" },
+                    { name: "Server 1", url: "https://dreamlyproxy.mukeshlive.workers.dev/?url=http://cloud.logichost.in:1935/live/malabarnews/index.m3u8" },
                 ], 
                 img: "https://i.ibb.co/k2rJDLHb/Malabar-News.jpg", 
                 category: "Local Cable Channel (Kerala)",
@@ -1905,7 +1905,7 @@ const channels = [
             { 
                 name: "Malabar Plus", 
                 sources: [
-                    { name: "Server 1", url: "https://cors-proxy.cooks.fyi/http://cloud.logichost.in:1935/live/mplus/index.m3u8" },
+                    { name: "Server 1", url: "https://dreamlyproxy.mukeshlive.workers.dev/?url=http://cloud.logichost.in:1935/live/mplus/index.m3u8" },
                 ], 
                 img: "https://i.ibb.co/cSzWsQqC/Malabar-Plus.jpg", 
                 category: "Local Cable Channel (Kerala)",
@@ -1914,7 +1914,7 @@ const channels = [
             { 
                 name: "KC Vision", 
                 sources: [
-                    { name: "Server 1", url: "https://cors-proxy.cooks.fyi/http://111.92.41.129:11037/hls/kv.m3u8" },
+                    { name: "Server 1", url: "https://dreamlyproxy.mukeshlive.workers.dev/?url=http://111.92.41.129:11037/hls/kv.m3u8" },
                 ], 
                 img: "https://i.ibb.co/FqJkGq7L/KCVision-HD.jpg", 
                 category: "Local Cable Channel (Kerala)",
@@ -1923,7 +1923,7 @@ const channels = [
             { 
                 name: "PTA News", 
                 sources: [
-                    { name: "Server 1", url: "https://anywhere.pwisetthon.com/http://cloud.logichost.in:1935/PTA/live/index.m3u8" },
+                    { name: "Server 1", url: "https://dreamlyproxy.mukeshlive.workers.dev/?url=http://cloud.logichost.in:1935/PTA/live/index.m3u8" },
                 ], 
                 img: "https://i.ibb.co/XZgjBpcv/PTANews.jpg", 
                 category: "Local Cable Channel (Kerala)",

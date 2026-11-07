@@ -475,7 +475,7 @@ const channels = [
             { 
                 name: "Asianet HD", 
                 sources: [
-                    { name: "Server 1", url: "https://cors-proxy.cooks.fyi/http://217.20.112.199/asianet/index.m3u8" }
+                    { name: "Server 1", url: "https://da86m1sqpm3o0.cloudfront.net/28072023/smil:starasianet.smil/playlists.m3u8" }
    
                 ], 
                 img: "https://i.ibb.co/S7JY0Q3f/Asianethd.jpg", 

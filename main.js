@@ -1779,7 +1779,7 @@ const channels = [
             { 
                 name: "Sun News", 
                 sources: [
-                    { name: "Server 1", url: "https://v5on.site/web/yt-restream/live.php?video_id=9M02G5c6x6w" },
+                    { name: "Server 1", url: "https://yt-live-worker.mhub2305.workers.dev/?channel=@Sunnewstamil" },
                 ], 
                 img: "https://i.ibb.co/Rpv756pb/Sun-News.jpg", 
                 category: "News",
